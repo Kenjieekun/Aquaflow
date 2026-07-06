@@ -4,37 +4,48 @@ import {
     signInWithCustomToken
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    const button = document.getElementById(
+    const biometricButton = document.getElementById(
         "biometric-login-btn"
     );
 
-    if (!button) return;
+    if (!biometricButton) return;
 
-    button.addEventListener(
+    biometricButton.addEventListener(
         "click",
         beginBiometricLogin
     );
 
 });
 
+
 function base64urlToBuffer(base64url) {
 
-    const padding = "=".repeat((4 - base64url.length % 4) % 4);
+    const padding =
+        "=".repeat((4 - (base64url.length % 4)) % 4);
 
-    const base64 =
-        (base64url + padding)
-            .replace(/-/g, "+")
-            .replace(/_/g, "/");
+    const base64 = (base64url + padding)
+
+        .replace(/-/g, "+")
+
+        .replace(/_/g, "/");
 
     const binary = atob(base64);
 
     return Uint8Array.from(
-        [...binary].map(c => c.charCodeAt(0))
+
+        [...binary].map(
+
+            character => character.charCodeAt(0)
+
+        )
+
     );
 
 }
+
 
 function bufferToBase64url(buffer) {
 
@@ -42,28 +53,49 @@ function bufferToBase64url(buffer) {
 
     let binary = "";
 
-    bytes.forEach(b => binary += String.fromCharCode(b));
+    bytes.forEach(byte => {
+
+        binary += String.fromCharCode(byte);
+
+    });
 
     return btoa(binary)
+
         .replace(/\+/g, "-")
+
         .replace(/\//g, "_")
+
         .replace(/=/g, "");
 
 }
+
 
 async function beginBiometricLogin() {
 
     try {
 
+        // ==========================================
+        // Begin Authentication
+        // ==========================================
+
         const beginResponse = await fetch(
-            "/webauthn/begin-authentication/",
+
+            "/webauthn/authenticate/begin/",
+
             {
+
                 method: "POST",
+
                 headers: {
+
                     "Content-Type": "application/json",
+
                 },
+
                 body: JSON.stringify({})
+
             }
+
         );
 
         const options = await beginResponse.json();
@@ -76,14 +108,28 @@ async function beginBiometricLogin() {
 
         }
 
-        options.challenge =
-            base64urlToBuffer(options.challenge);
+        options.challenge = base64urlToBuffer(
+            options.challenge
+        );
 
         options.allowCredentials =
-            options.allowCredentials.map(c => ({
-                ...c,
-                id: base64urlToBuffer(c.id),
-            }));
+            options.allowCredentials.map(
+
+                credential => ({
+
+                    ...credential,
+
+                    id: base64urlToBuffer(
+                        credential.id
+                    )
+
+                })
+
+            );
+
+        // ==========================================
+        // Open Biometrics Prompt
+        // ==========================================
 
         const credential =
             await navigator.credentials.get({
@@ -92,16 +138,22 @@ async function beginBiometricLogin() {
 
             });
 
+        // ==========================================
+        // Finish Authentication
+        // ==========================================
+
         const finishResponse = await fetch(
 
-            "/webauthn/finish-authentication/",
+            "/webauthn/authenticate/finish/",
 
             {
 
                 method: "POST",
 
                 headers: {
+
                     "Content-Type": "application/json",
+
                 },
 
                 body: JSON.stringify({
@@ -133,9 +185,11 @@ async function beginBiometricLogin() {
 
                         userHandle:
                             credential.response.userHandle
+
                                 ? bufferToBase64url(
-                                      credential.response.userHandle
-                                  )
+                                    credential.response.userHandle
+                                )
+
                                 : null
 
                     }
@@ -156,6 +210,10 @@ async function beginBiometricLogin() {
             return;
 
         }
+
+        // ==========================================
+        // Firebase Login
+        // ==========================================
 
         await signInWithCustomToken(
 
