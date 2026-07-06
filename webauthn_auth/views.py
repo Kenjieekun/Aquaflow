@@ -10,7 +10,11 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 
 from webauthn import verify_registration_response
+from webauthn.helpers import options_to_json
+
 from water_refilling_system.firebase_admin import db
+
+from .utils import create_registration_options
 
 @csrf_exempt
 @require_POST
