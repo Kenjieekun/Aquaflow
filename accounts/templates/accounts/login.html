@@ -131,6 +131,10 @@
                     Login
                 </button>
 
+                <button id="biometric-login-btn" type="button">
+                    Login with Biometrics
+                </button>
+
             </form>
 
             <div class="register-link">
@@ -158,6 +162,9 @@
 
 <!-- Login UI -->
 <script src="{% static 'accounts/js/login.js' %}"></script>
+
+<!-- Login Biometrics -->
+<script type="module" src="{% static 'accounts/js/biometric-login.js' %}"></script>
 
 <!-- Firebase Login -->
 <script type="module" src="{% static 'accounts/js/firebase-login.js' %}"></script>

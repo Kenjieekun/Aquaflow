@@ -4,6 +4,7 @@ import firebase_admin
 
 from firebase_admin import credentials
 from firebase_admin import firestore
+from firebase_admin import auth
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
