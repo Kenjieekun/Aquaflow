@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Customers | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/admin-customers.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Customers</h1>
+
+                <p>
+                    View and manage registered customers.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             SEARCH BAR
+        ========================== -->
+
+        <section class="toolbar">
+
+            <input
+                type="text"
+                id="searchCustomer"
+                placeholder="Search customer...">
+
+        </section>
+
+        <!-- =========================
+             CUSTOMERS TABLE
+        ========================== -->
+
+        <section class="table-container">
+
+            <table class="customer-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Phone</th>
+
+                        <th>Orders</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="customerTableBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- =========================
+     CUSTOMER DETAILS MODAL
+========================== -->
+
+<div
+    id="customerModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Customer Details
+
+            </h2>
+
+            <button
+                type="button"
+                id="closeCustomerModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="customer-details">
+
+            <div class="detail-group">
+
+                <label>Full Name</label>
+
+                <p id="customerName"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Email</label>
+
+                <p id="customerEmail"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Phone</label>
+
+                <p id="customerPhone"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Address</label>
+
+                <p id="customerAddress"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Total Orders</label>
+
+                <p id="customerOrders"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Status</label>
+
+                <p id="customerStatus"></p>
+
+            </div>
+
+            <div class="detail-group">
+
+                <label>Registered</label>
+
+                <p id="customerCreated"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-admin-customers.js' %}">
+</script>
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

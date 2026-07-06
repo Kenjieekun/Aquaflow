@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard | AquaFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- Background -->
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+
+    <!-- Sidebar -->
+    {% include "accounts/includes/sidebar.html" %}
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- Welcome -->
+        <section class="welcome-section">
+
+            <div>
+
+                <h1>
+                    Welcome Back,
+                    <span id="userName">Loading...</span>
+                    👋
+                </h1>
+
+                <p>
+                    Manage your AquaFlow account and monitor your orders.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Dashboard Cards -->
+
+        {% include "accounts/includes/dashboard_cards.html" %}
+
+        <!-- Recent Orders -->
+
+        {% include "accounts/includes/recent_orders.html" %}
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script type="module"
+src="{% static 'accounts/js/firebase-dashboard.js' %}"></script>
+
+<script type="module"
+src="{% static 'accounts/js/firebase-user.js' %}"></script>
+
+<script type="module"
+src="{% static 'accounts/js/firebase-logout.js' %}"></script>
+
+
+
+{% endblock %}

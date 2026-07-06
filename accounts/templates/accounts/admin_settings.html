@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Settings | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'accounts/css/dashboard.css' %}">
+
+<link
+    rel="stylesheet"
+    href="{% static 'accounts/css/admin-settings.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- ========================================
+             PAGE HEADER
+        ========================================= -->
+
+        <section class="welcome-section">
+
+            <h1>System Settings</h1>
+
+            <p>
+                Configure your AquaFlow management system.
+            </p>
+
+        </section>
+
+        <!-- ========================================
+             SETTINGS FORM
+        ========================================= -->
+
+        <section class="settings-container">
+
+            <!-- ========================================
+                 GENERAL INFORMATION
+            ========================================= -->
+
+            <div class="settings-card">
+
+                <h2>General Information</h2>
+
+                <div class="settings-grid">
+
+                    <div class="form-group">
+
+                        <label>System Name</label>
+
+                        <input
+                            type="text"
+                            id="systemName">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Business Name</label>
+
+                        <input
+                            type="text"
+                            id="businessName">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Business Email</label>
+
+                        <input
+                            type="email"
+                            id="businessEmail">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Business Phone</label>
+
+                        <input
+                            type="text"
+                            id="businessPhone">
+
+                    </div>
+
+                    <div class="form-group full-width">
+
+                        <label>Business Address</label>
+
+                        <textarea
+                            id="businessAddress"
+                            rows="3"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================
+                 INVENTORY SETTINGS
+            ========================================= -->
+
+            <div class="settings-card">
+
+                <h2>Inventory</h2>
+
+                <div class="settings-grid">
+
+                    <div class="form-group">
+
+                        <label>Low Stock Alert</label>
+
+                        <input
+                            type="number"
+                            id="lowStockAlert">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>Archive Orders After (Days)</label>
+
+                        <input
+                            type="number"
+                            id="archiveDays">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================
+                 NOTIFICATIONS
+            ========================================= -->
+
+            <div class="settings-card">
+
+                <h2>Notifications</h2>
+
+                <div class="checkbox-group">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="notifyNewOrders">
+
+                        Notify when new orders are placed
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="notifyLowStock">
+
+                        Notify when stock is low
+
+                    </label>
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="notifyCancelledOrders">
+
+                        Notify when orders are cancelled
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================
+                 ACTION BUTTONS
+            ========================================= -->
+
+            <div class="settings-footer">
+
+                <button
+                    id="saveSettingsBtn"
+                    class="save-btn">
+
+                    Save Settings
+
+                </button>
+
+                <button
+                    id="enableBiometricBtn"
+                    class="save-btn">
+
+                    Enable Biometrics
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================
+             OTP VERIFICATION MODAL
+        ========================================= -->
+
+        <div
+            id="otpModal"
+            class="otp-modal">
+
+            <div class="otp-card">
+
+                <h2>Verify Changes</h2>
+
+                <p>
+                    A 6-digit verification code has been sent to the administrator email.
+                </p>
+
+                <input
+                    type="text"
+                    id="otpInput"
+                    maxlength="6"
+                    placeholder="Enter OTP">
+
+                <div class="otp-actions">
+
+                    <button
+                        id="verifyOtpBtn"
+                        class="verify-btn">
+
+                        Verify
+
+                    </button>
+
+                    <button
+                        id="cancelOtpBtn"
+                        class="cancel-btn">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+                <button
+                    id="resendOtpBtn"
+                    class="resend-btn"
+                    disabled>
+
+                    Resend OTP (60s)
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================
+             TOAST NOTIFICATION
+        ========================================= -->
+
+        <div
+            id="toast"
+            class="toast">
+
+            <span id="toastMessage"></span>
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-admin-settings.js' %}">
+</script>
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

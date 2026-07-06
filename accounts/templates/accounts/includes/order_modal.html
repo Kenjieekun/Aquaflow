@@ -1,0 +1,118 @@
+<div class="order-modal" id="orderModal">
+
+    <div class="order-box glass">
+
+        <span class="close-modal" id="closeModal">
+            &times;
+        </span>
+
+        <h2>Place Order</h2>
+
+        <div class="order-info">
+
+            <h3 id="modalProductName"></h3>
+
+            <p>
+                Price:
+                <strong>
+                    ₱<span id="modalPrice"></span>
+                </strong>
+            </p>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Quantity</label>
+
+            <input
+                type="number"
+                id="orderQuantity"
+                min="1"
+                value="1">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Delivery Date</label>
+
+            <input
+                type="date"
+                id="deliveryDate">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Delivery Address</label>
+
+            <textarea
+                id="deliveryAddress"
+                rows="3"
+                placeholder="Enter complete address"></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+    <label>Payment Method</label>
+
+    <select id="paymentMethod">
+
+        <option value="">
+            Select Payment
+        </option>
+
+        <option value="Cash on Delivery">
+            Cash on Delivery
+        </option>
+
+        <option value="GCash">
+            GCash
+        </option>
+
+        <option value="Maya">
+            Maya
+        </option>
+
+        <option value="Bank Transfer">
+            Bank Transfer
+        </option>
+
+    </select>
+
+</div>
+
+        <h3>
+
+            Total:
+
+            ₱<span id="orderTotal">0</span>
+
+        </h3>
+
+        <div class="modal-buttons">
+
+            <button
+                class="cancel-btn"
+                id="cancelOrder">
+
+                Cancel
+
+            </button>
+
+            <button
+                class="place-btn"
+                id="placeOrder">
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

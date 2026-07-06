@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <!-- ========================================
+         META
+    ========================================= -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="theme-color"
+        content="#0F9D58">
+
+    <meta
+        name="color-scheme"
+        content="light dark">
+
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <!-- ========================================
+         FAVICON
+    ========================================= -->
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="{% static 'accounts/images/favicon.ico' %}">
+
+    <!-- ========================================
+         FONT AWESOME
+    ========================================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ========================================
+         GLOBAL STYLES
+    ========================================= -->
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/variable.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="{% static 'accounts/css/index.css' %}">
+
+    <!-- ========================================
+         PAGE STYLES
+    ========================================= -->
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <!-- ========================================
+         PAGE CONTENT
+    ========================================= -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- ========================================
+         GLOBAL SCRIPTS
+    ========================================= -->
+
+    <script
+        type="module"
+        src="{% static 'accounts/js/firebase-config.js' %}">
+    </script>
+
+    <script
+        defer
+        src="{% static 'accounts/js/theme.js' %}">
+    </script>
+
+    <script
+      defer
+      src="{% static 'accounts/js/dashboard.js' %}">
+    </script>
+
+    <!-- ========================================
+         PAGE SCRIPTS
+    ========================================= -->
+
+    {% block extra_js %}
+    {% endblock %}
+
+</body>
+
+</html>

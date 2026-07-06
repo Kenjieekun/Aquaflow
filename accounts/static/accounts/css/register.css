@@ -1,0 +1,349 @@
+/* ==========================================
+   REGISTER PAGE
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+}
+
+.register-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
+}
+
+.register-container{
+    width:100%;
+    max-width:1100px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:var(--card);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+/* ==========================
+   LEFT PANEL
+========================== */
+
+.register-left{
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+    color:white;
+    padding:60px 50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.register-left .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:34px;
+    font-weight:700;
+
+    color:white;
+    text-decoration:none;
+
+    margin-bottom:25px;
+}
+
+.register-left h1{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.register-left p{
+    font-size:17px;
+    line-height:1.8;
+    margin-bottom:40px;
+}
+
+.back-home{
+    width:fit-content;
+    padding:12px 22px;
+    background:white;
+    color:#2563EB;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.back-home:hover{
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   RIGHT PANEL
+========================== */
+
+.register-right{
+    padding:50px;
+}
+
+.register-right h2{
+    text-align:center;
+    color:#2563EB;
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.input-group label{
+    margin-bottom:8px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.input-group input,
+.input-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+    resize:none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus{
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+/* ==========================
+   CHECKBOX
+========================== */
+
+.checkbox{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:10px 0 25px;
+}
+
+.checkbox label{
+    font-size:15px;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.register-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#2563EB;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.register-btn{
+    transition:all .3s ease;
+}
+
+.register-btn:hover{
+    background:#1D4ED8;
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(37,99,235,.35);
+}
+
+.register-btn:active{
+    transform:translateY(-1px);
+}
+
+/* ==========================
+   LOGIN LINK
+========================== */
+
+.login-link{
+    margin-top:25px;
+    text-align:center;
+    font-size:15px;
+}
+
+.login-link a{
+    color:#2563EB;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.login-link a:hover{
+    text-decoration:underline;
+}
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark .register-page{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+}
+
+body.dark .register-container{
+    background:#1f2937;
+    box-shadow:0 20px 40px rgba(0,0,0,.45);
+}
+
+body.dark .register-left{
+    background:linear-gradient(135deg,#1d4ed8,#1e40af);
+}
+
+body.dark .register-left .logo,
+body.dark .register-left h1,
+body.dark .register-left p{
+    color:white;
+}
+
+body.dark .back-home{
+    background:#111827;
+    color:white;
+}
+
+body.dark .back-home:hover{
+    background:#2563EB;
+}
+
+body.dark .register-right{
+    background:#1f2937;
+}
+
+body.dark .register-right h2{
+    color:#60A5FA;
+}
+
+body.dark .input-group label{
+    color:#f3f4f6;
+}
+
+body.dark .input-group input,
+body.dark .input-group textarea{
+    background:#111827;
+    color:white;
+    border:1px solid #374151;
+}
+
+body.dark .input-group input::placeholder,
+body.dark .input-group textarea::placeholder{
+    color:#9ca3af;
+}
+
+body.dark .checkbox label{
+    color:white;
+}
+
+body.dark .login-link{
+    color:white;
+}
+
+body.dark .login-link a{
+    color:#60A5FA;
+}
+
+body.dark .toggle-password{
+    color:#9ca3af;
+}
+
+body.dark .toggle-password:hover{
+    color:white;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+    .register-container{
+        grid-template-columns:1fr;
+    }
+
+    .register-left{
+        text-align:center;
+        align-items:center;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .register-right,
+    .register-left{
+        padding:35px 25px;
+    }
+
+    .register-left h1{
+        font-size:30px;
+    }
+
+    .register-right h2{
+        font-size:28px;
+    }
+
+}
+
+.password-box{
+    position: relative;
+}
+
+.password-box input{
+    width:100%;
+    padding-right:45px;
+}
+
+.toggle-password{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 18px;
+    transition: .3s;
+    z-index: 10;
+}
+
+.toggle-password:hover{
+    color:#2563EB;
+}
+
+.register-left .logo{
+    color:white !important;
+}

@@ -1,0 +1,85 @@
+<div class="dashboard-sidebar">
+
+    <div class="dashboard-logo">
+
+        <i class="fa-solid fa-droplet"></i>
+
+        <span>AquaFlow</span>
+
+    </div>
+
+    <ul class="dashboard-menu">
+
+        <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+
+            <a href="{% url 'dashboard' %}">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'orders' %}active{% endif %}">
+
+            <a href="{% url 'orders' %}">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                My Orders
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'products' %}active{% endif %}">
+
+            <a href="{% url 'products' %}">
+
+                <i class="fa-solid fa-bottle-water"></i>
+
+                Products
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+
+            <a href="{% url 'profile' %}">
+
+                <i class="fa-solid fa-user"></i>
+
+                Profile
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'settings' %}active{% endif %}">
+
+            <a href="{% url 'settings' %}">
+
+                <i class="fa-solid fa-gear"></i>
+
+                Settings
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    <button
+        id="logoutBtn"
+        class="logout-btn">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Logout
+
+    </button>
+
+</div>

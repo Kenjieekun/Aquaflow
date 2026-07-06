@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage Orders | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+href="{% static 'accounts/css/admin-orders.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <section class="welcome-section">
+
+            <h1>Manage Orders</h1>
+
+            <p>
+                View and update customer orders.
+            </p>
+
+        </section>
+
+        <div id="ordersTable"
+             class="orders-table">
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+type="module"
+src="{% static 'accounts/js/firebase-admin-orders.js' %}">
+</script>
+
+<script
+type="module"
+src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

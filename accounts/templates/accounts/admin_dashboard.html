@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Admin Dashboard | AquaFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/admin-dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- Header -->
+        <section class="welcome-section">
+
+            <h1>Administrator Dashboard</h1>
+
+            <p>
+                Monitor customers, orders, inventory, and sales.
+            </p>
+
+        </section>
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <h3>Total Customers</h3>
+                <h2 id="totalCustomers">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Orders</h3>
+                <h2 id="totalOrders">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Total Sales</h3>
+                <h2 id="totalSales">₱0</h2>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending Orders</h3>
+                <h2 id="pendingOrders">0</h2>
+            </div>
+
+            <div class="stat-card delivered">
+                <h3>Delivered Orders</h3>
+                <h2 id="deliveredOrders">0</h2>
+            </div>
+
+            <div class="stat-card processing">
+                <h3>Processing Orders</h3>
+                <h2 id="processingOrders">0</h2>
+            </div>
+
+            <div class="stat-card low-stock">
+                <h3>Low Stock Products</h3>
+                <h2 id="lowStockProducts">0</h2>
+            </div>
+
+            <div class="stat-card out-stock">
+                <h3>Out of Stock</h3>
+                <h2 id="outOfStockProducts">0</h2>
+            </div>
+
+        </section>
+
+        <!-- Recent Orders -->
+        <section class="dashboard-section">
+
+            <h2>Recent Orders</h2>
+
+            <div id="recentOrders">
+
+                <p>No recent orders.</p>
+
+            </div>
+
+        </section>
+
+        <!-- Low Stock Products -->
+        <section class="dashboard-section">
+
+            <h2>Low Stock Products</h2>
+
+            <div id="lowStockList">
+
+                <p>All products have sufficient stock.</p>
+
+            </div>
+
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="dashboard-section">
+
+            <h2>Quick Actions</h2>
+
+            <div class="quick-actions">
+
+                <a href="{% url 'admin_products' %}" class="action-btn">
+                    ➕ Add Product
+                </a>
+
+                <a href="{% url 'admin_orders' %}" class="action-btn">
+                    📦 Manage Orders
+                </a>
+
+                <a href="{% url 'admin_customers' %}" class="action-btn">
+                    👥 Manage Customers
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script type="module" src="{% static 'accounts/js/firebase-admin-dashboard.js' %}"></script>
+
+<script type="module" src="{% static 'accounts/js/firebase-logout.js' %}"></script>
+
+{% endblock %}

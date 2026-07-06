@@ -1,0 +1,293 @@
+/* ========================================
+   SEARCH BAR
+======================================== */
+
+.toolbar {
+
+    margin-bottom: 20px;
+
+}
+
+.toolbar input {
+
+    width: 100%;
+
+    padding: 12px 16px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--card);
+
+    color: var(--text);
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+.toolbar input:focus {
+
+    border-color: var(--primary);
+
+}
+
+/* ========================================
+   TABLE
+======================================== */
+
+.table-container {
+
+    overflow-x: auto;
+
+}
+
+.customer-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: var(--card);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+.customer-table thead {
+
+    background: var(--primary);
+
+    color: #fff;
+
+}
+
+.customer-table th,
+.customer-table td {
+
+    padding: 16px;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+.customer-table tbody tr:hover {
+
+    background: rgba(255,255,255,.05);
+
+}
+
+/* ========================================
+   STATUS
+======================================== */
+
+.status {
+
+    padding: 6px 14px;
+
+    border-radius: 50px;
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+.status.active {
+
+    background: #22c55e;
+
+}
+
+.status.disabled {
+
+    background: #ef4444;
+
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.action-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+.view-btn,
+.toggle-btn {
+
+    padding: 8px 16px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: .2s;
+
+}
+
+.view-btn {
+
+    background: var(--primary);
+
+    color: #fff;
+
+}
+
+.view-btn:hover {
+
+    opacity: .9;
+
+}
+
+.toggle-btn {
+
+    background: #ef4444;
+
+    color: #fff;
+
+}
+
+.toggle-btn.enable {
+
+    background: #22c55e;
+
+}
+
+.toggle-btn:hover {
+
+    opacity: .9;
+
+}
+
+/* ========================================
+   MODAL
+======================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.5);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999;
+
+}
+
+.modal.show {
+
+    display: flex;
+
+}
+
+.modal-content {
+
+    width: 500px;
+
+    max-width: 90%;
+
+    background: var(--card);
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: var(--shadow);
+
+}
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.modal-header h2 {
+
+    margin: 0;
+
+}
+
+.modal-header button {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    color: var(--text);
+
+}
+
+.customer-details {
+
+    display: grid;
+
+    gap: 18px;
+
+}
+
+.detail-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+.detail-group label {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: var(--text-light);
+
+}
+
+.detail-group p {
+
+    margin: 0;
+
+    color: var(--text);
+
+}

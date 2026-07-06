@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Products | AquaFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/css/admin-products.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- ==============================
+             PAGE HEADER
+        =============================== -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Products</h1>
+
+                <p>
+                    Manage your water products and inventory.
+                </p>
+
+            </div>
+
+            <button
+                id="addProductBtn"
+                class="primary-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Product
+
+            </button>
+
+        </section>
+
+        <!-- ==============================
+             SEARCH BAR
+        =============================== -->
+
+        <section class="toolbar">
+
+            <input
+                type="text"
+                id="searchProduct"
+                placeholder="Search products...">
+
+        </section>
+
+        <!-- ==============================
+             PRODUCTS TABLE
+        =============================== -->
+
+        <section class="table-container">
+
+            <table class="product-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="productTableBody"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- ==============================
+     ADD PRODUCT MODAL
+============================== -->
+
+<div
+    id="productModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add Product
+        </h2>
+
+            <button
+                type="button"
+                id="closeModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="productForm">
+
+            <!-- Product Preview -->
+
+            <div class="image-preview">
+
+                <img
+                 id="previewImage"
+                 src="https://placehold.co/250x250?text=No+Image"
+                 alt="Product Preview">
+
+            </div>
+
+            <!-- Product Image -->
+
+            <div class="input-group">
+
+                <label for="productImage">
+
+                    Product Image
+
+                </label>
+
+                <select
+                    id="productImage"
+                    required>
+
+                    <option value="">
+                        Select Product Image
+                    </option>
+
+                    {% for image in product_images %}
+
+                    <option value="{{ image }}">
+                        {{ image|cut:".png"|cut:".jpg"|cut:".jpeg"|cut:".webp"|title }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <!-- Product Name -->
+
+            <div class="input-group">
+
+                <label for="productName">
+
+                    Product Name
+
+                </label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    required>
+
+            </div>
+
+            <!-- Category -->
+
+            <div class="input-group">
+
+                <label for="productCategory">
+
+                    Category
+
+                </label>
+
+                <input
+                    type="text"
+                    id="productCategory"
+                    required>
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="input-group">
+
+                <label for="productDescription">
+
+                    Description
+
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    rows="3"></textarea>
+
+            </div>
+
+            <!-- Price & Stock -->
+
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="productPrice">
+
+                        Price (₱)
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productPrice"
+                        min="1"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="productStock">
+
+                        Stock
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="productStock"
+                        min="0"
+                        required>
+
+                </div>
+
+            </div>
+
+            <!-- Minimum Stock & Status -->
+
+            <div class="row">
+
+                <div class="input-group">
+
+                    <label for="minimumStock">
+
+                        Minimum Stock
+
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minimumStock"
+                        value="10"
+                        min="0">
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="productAvailable">
+
+                        Status
+
+                    </label>
+
+                    <select id="productAvailable">
+
+                        <option value="true">
+                            Available
+                        </option>
+
+                        <option value="false">
+                            Unavailable
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+
+            <button
+                type="submit"
+                class="primary-btn">
+
+                Save Product
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-admin-products.js' %}">
+</script>
+
+{% endblock %}

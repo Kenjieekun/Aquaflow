@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Products | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/products.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <!-- Background -->
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+
+    <!-- Sidebar -->
+    {% include "accounts/includes/sidebar.html" %}
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- Page Header -->
+        <section class="welcome-section">
+
+            <h1>Products</h1>
+
+            <p>
+                Browse available AquaFlow products.
+            </p>
+
+        </section>
+
+        <!-- Search & Filter -->
+        <section class="product-controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search product...">
+
+            <select id="stockFilter">
+
+                <option value="">
+                    All Products
+                </option>
+
+                <option value="available">
+                    Available
+                </option>
+
+                <option value="out">
+                    Out of Stock
+                </option>
+
+            </select>
+
+        </section>
+
+        <!-- Products -->
+        <section
+            class="product-grid"
+            id="productGrid">
+
+            <!-- Products loaded from Firebase -->
+
+        </section>
+
+        <!-- Pagination -->
+        <section class="pagination">
+
+            <button id="prevPage">
+
+                Previous
+
+            </button>
+
+            <span id="pageNumber">
+
+                Page 1
+
+            </span>
+
+            <button id="nextPage">
+
+                Next
+
+            </button>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Order Modal -->
+{% include "accounts/includes/order_modal.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+
+<!-- Products -->
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-products.js' %}">
+</script>
+
+<!-- Logout -->
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+<!-- User Information -->
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-user.js' %}">
+</script>
+
+{% endblock %}

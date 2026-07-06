@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Orders | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/orders.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="bg-circle circle1"></div>
+    <div class="bg-circle circle2"></div>
+
+    {% include "accounts/includes/sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <section class="welcome-section">
+
+            <h1>My Orders</h1>
+
+            <p>
+                View and track your water refilling orders.
+            </p>
+
+        </section>
+
+        <div id="ordersContainer" class="orders-container">
+
+            <!-- Orders loaded from Firebase -->
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script type="module"
+src="{% static 'accounts/js/firebase-orders.js' %}">
+</script>
+
+<script type="module"
+src="{% static 'accounts/js/firebase-user.js' %}">
+</script>
+
+<script type="module"
+src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

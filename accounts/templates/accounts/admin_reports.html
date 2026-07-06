@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Reports | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+      href="{% static 'accounts/css/admin-reports.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Reports</h1>
+
+                <p>
+
+                    View sales reports and business analytics.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================== -->
+
+        <section class="report-cards">
+
+            <div class="report-card">
+
+                <h3>Total Revenue</h3>
+
+                <h2 id="totalRevenue">
+
+                    ₱0
+
+                </h2>
+
+            </div>
+
+            <div class="report-card">
+
+                <h3>Total Orders</h3>
+
+                <h2 id="totalOrders">
+
+                    0
+
+                </h2>
+
+            </div>
+
+            <div class="report-card">
+
+                <h3>Total Customers</h3>
+
+                <h2 id="totalCustomers">
+
+                    0
+
+                </h2>
+
+            </div>
+
+            <div class="report-card">
+
+                <h3>Products Sold</h3>
+
+                <h2 id="productsSold">
+
+                    0
+
+                </h2>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             MONTHLY SALES CHART
+        ========================== -->
+
+        <section class="chart-container">
+
+            <div class="card">
+
+                <h2>
+
+                    Monthly Revenue
+
+                </h2>
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             BEST SELLING PRODUCTS
+        ========================== -->
+
+        <section class="table-container">
+
+            <div class="card">
+
+                <h2>
+
+                    Best Selling Products
+
+                </h2>
+
+                <table class="report-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Product</th>
+
+                            <th>Total Sold</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="bestSellingTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- =========================
+             RECENT SALES
+        ========================== -->
+
+        <section class="table-container">
+
+            <div class="card">
+
+                <h2>
+
+                    Recent Sales
+
+                </h2>
+
+                <table class="report-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Customer</th>
+
+                            <th>Product</th>
+
+                            <th>Total</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="recentSalesTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-admin-reports.js' %}">
+</script>
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

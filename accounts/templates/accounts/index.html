@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AquaFlow Water Refilling Station{% endblock %}
+
+{% block content %}
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <i class="fa-solid fa-droplet"></i>
+            <span>AquaFlow</span>
+        </a>
+
+        <!-- Navigation -->
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Right Buttons -->
+        <div class="nav-buttons">
+
+            <button id="themeToggle" class="theme-btn" title="Dark Mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+
+            <a href="{% url 'login' %}" class="btn-login">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}" class="btn-register">
+                Register
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<section class="hero">
+
+    <div class="container hero-container">
+
+        <div class="hero-text">
+
+            <h1>Clean Water,<br>Delivered to Your Doorstep</h1>
+
+            <p>
+                AquaFlow Water Refilling Station provides safe,
+                purified drinking water with fast and reliable
+                delivery services for homes and businesses.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'register' %}" class="primary-btn">
+                    Get Started
+                </a>
+
+                <a href="{% url 'login' %}" class="secondary-btn">
+                    Login
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <div class="image-placeholder">
+                💧
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- About Section -->
+
+<section id="about" class="about">
+
+    <div class="container about-container">
+
+        <div class="about-image">
+
+            <div class="about-placeholder">
+                💧
+            </div>
+
+        </div>
+
+        <div class="about-text">
+
+            <h2>About AquaFlow</h2>
+
+            <p>
+                AquaFlow Water Refilling Station is committed to providing
+                clean, safe, and affordable purified drinking water for
+                homes, offices, and businesses.
+
+                We prioritize customer satisfaction by ensuring quality
+                water purification and fast delivery services.
+            </p>
+
+            <a href="#services" class="primary-btn">
+                Explore Services
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Services -->
+
+<section id="services" class="services">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Our Services
+        </h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+
+                <div class="icon">💧</div>
+
+                <h3>Water Refilling</h3>
+
+                <p>
+                    High-quality purified drinking water for every household.
+                </p>
+
+            </div>
+
+            <div class="service-card">
+
+                <div class="icon">🚚</div>
+
+                <h3>Home Delivery</h3>
+
+                <p>
+                    Fast and reliable delivery right to your doorstep.
+                </p>
+
+            </div>
+
+            <div class="service-card">
+
+                <div class="icon">🏢</div>
+
+                <h3>Business Supply</h3>
+
+                <p>
+                    Affordable bulk water supply for offices and establishments.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="contact" class="contact">
+
+    <div class="container">
+
+        <h2 class="section-title">Contact Us</h2>
+
+        <div class="contact-box">
+
+            <p><strong>📍 Address:</strong> 067 Poblacion Plaridel Bulacan</p>
+
+            <p><strong>📞 Contact:</strong> 0967-351-8621</p>
+
+            <p><strong>✉ Email:</strong> aquaflow@email.com</p>
+
+            <p><strong>🕒 Business Hours:</strong> Monday - Saturday | 8:00 AM - 6:00 PM</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="container">
+
+        <p>
+            © 2026 AquaFlow Water Refilling Station.
+            All Rights Reserved.
+        </p>
+
+    </div>
+
+</footer>
+{% endblock %}

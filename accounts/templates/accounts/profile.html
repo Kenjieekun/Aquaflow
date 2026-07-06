@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profile | AquaFlow{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet"
+href="{% static 'accounts/css/dashboard.css' %}">
+
+<link rel="stylesheet"
+href="{% static 'accounts/css/profile.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <div class="bg-circle circle1"></div>
+
+    <div class="bg-circle circle2"></div>
+
+    {% include "accounts/includes/sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <section class="welcome-section">
+
+            <h1>My Profile</h1>
+
+            <p>
+
+                Manage your personal information.
+
+            </p>
+
+        </section>
+
+        <div class="profile-card glass">
+
+            <div class="form-group">
+
+                <label>First Name</label>
+
+                <input
+                    type="text"
+                    id="firstName">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Last Name</label>
+
+                <input
+                    type="text"
+                    id="lastName">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    readonly>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="text"
+                    id="phone">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Address</label>
+
+                <textarea
+                    id="address"
+                    rows="4"></textarea>
+
+            </div>
+
+            <button
+                id="saveProfile"
+                class="save-btn">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+type="module"
+src="{% static 'accounts/js/firebase-profile.js' %}">
+</script>
+
+<script
+type="module"
+src="{% static 'accounts/js/firebase-user.js' %}">
+</script>
+
+<script
+type="module"
+src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

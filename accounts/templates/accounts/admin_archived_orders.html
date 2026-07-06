@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Archived Orders | AquaFlow
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'accounts/css/dashboard.css' %}">
+
+<link
+    rel="stylesheet"
+    href="{% static 'accounts/css/admin-orders.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    {% include "accounts/includes/admin_sidebar.html" %}
+
+    <main class="main-content">
+
+        {% include "accounts/includes/navbar.html" %}
+
+        <!-- ========================================
+             PAGE HEADER
+        ========================================= -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>Archived Orders</h1>
+
+                <p>
+
+                    View archived customer orders and restore them when necessary.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- ========================================
+             ARCHIVED ORDERS TABLE
+        ========================================= -->
+
+        <section class="table-container">
+
+            <table class="product-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Delivery Date</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="archiveTableBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-admin-archived-orders.js' %}">
+</script>
+
+<script
+    type="module"
+    src="{% static 'accounts/js/firebase-logout.js' %}">
+</script>
+
+{% endblock %}

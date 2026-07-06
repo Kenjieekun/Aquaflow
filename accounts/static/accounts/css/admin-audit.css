@@ -1,0 +1,99 @@
+.page-header{
+
+    margin-bottom:30px;
+
+}
+
+.page-header h1{
+
+    font-size:32px;
+
+    color:var(--text);
+
+}
+
+.page-header p{
+
+    color:var(--text-light);
+
+    margin-top:8px;
+
+}
+
+.audit-container{
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.audit-toolbar{
+
+    margin-bottom:20px;
+
+}
+
+.audit-toolbar input{
+
+    width:320px;
+
+    max-width:100%;
+
+    padding:12px 15px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+}
+
+.table-wrapper{
+
+    overflow:auto;
+
+}
+
+.audit-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.audit-table th{
+
+    text-align:left;
+
+    padding:15px;
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+.audit-table td{
+
+    padding:15px;
+
+    border-bottom:1px solid var(--border);
+
+    color:var(--text);
+
+}
+
+.audit-table tr:hover{
+
+    background:rgba(37,99,235,.05);
+
+}

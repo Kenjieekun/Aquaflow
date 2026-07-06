@@ -1,0 +1,96 @@
+.profile-card{
+
+    max-width:700px;
+
+    padding:35px;
+
+}
+
+.form-group{
+
+    margin-bottom:22px;
+
+}
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.form-group input,
+.form-group textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:var(--card);
+
+    color:var(--text);
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.form-group textarea{
+
+    resize:none;
+
+}
+
+.form-group input:read-only{
+
+    background:#f1f5f9;
+
+}
+
+body.dark .form-group input:read-only{
+
+    background:#334155;
+
+}
+
+.save-btn{
+
+    margin-top:10px;
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.save-btn:hover{
+
+    background:var(--primary-hover);
+
+}

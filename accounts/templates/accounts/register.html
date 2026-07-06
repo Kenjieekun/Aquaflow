@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Register | AquaFlow{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'accounts/css/register.css' %}?v=2">
+{% endblock %}
+
+{% block content %}
+
+<div class="register-page">
+
+    <div class="register-container">
+
+        <!-- LEFT SIDE -->
+        <div class="register-left">
+
+            <div class="logo">
+                💧 AquaFlow
+            </div>
+
+            <h1>Create Your Account</h1>
+
+            <p>
+                Join AquaFlow Water Refilling Station and enjoy
+                fast, safe, and reliable water delivery services.
+            </p>
+
+            <a href="{% url 'index' %}" class="back-home">
+                ← Back to Home
+            </a>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="register-right">
+
+            <h2>Create Account</h2>
+
+            <form id="registerForm">
+
+                <!-- First & Last Name -->
+                <div class="row">
+
+                    <div class="input-group">
+                        <label for="firstName">First Name</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Enter first name"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Enter last name"
+                            required>
+                    </div>
+
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@email.com"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <!-- Phone -->
+                <div class="input-group">
+                    <label for="phone">Contact Number</label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        name="phone"
+                        maxlength="11"
+                        inputmode="numeric"
+                        placeholder="09XXXXXXXXX"
+                        required>
+                </div>
+
+                <!-- Address -->
+                <div class="input-group">
+
+                    <label for="address">
+                        Complete Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        name="address"
+                        rows="3"
+                        placeholder="Enter complete address"
+                        required></textarea>
+
+                </div>
+
+                <!-- Password -->
+                <div class="row">
+
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                required>
+
+                            <i class="fa-solid fa-eye toggle-password"></i>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Confirm Password</label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Confirm Password"
+                                required>
+
+                            <i class="fa-solid fa-eye toggle-password"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Terms -->
+
+                <div class="checkbox">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        required>
+
+                    <label for="terms">
+                        I agree to the Terms & Conditions
+                    </label>
+
+                </div>
+
+                <!-- Button -->
+
+                <button type="submit" class="register-btn">
+                    Create Account
+                </button>
+
+                <div class="login-link">
+
+                    Already have an account?
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'accounts/js/register.js' %}"></script>
+<script type="module" src="{% static 'accounts/js/firebase-register.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,225 @@
+/* ========================================
+   ORDERS CONTAINER
+======================================== */
+
+.orders-table {
+
+    display: grid;
+    gap: 20px;
+
+}
+
+/* ========================================
+   ORDER CARD
+======================================== */
+
+.admin-order {
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.admin-header {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.admin-header h3 {
+
+    font-size: 22px;
+    font-weight: 600;
+
+}
+
+.admin-header strong {
+
+    color: var(--primary);
+    font-size: 18px;
+
+}
+
+/* ========================================
+   ORDER DETAILS
+======================================== */
+
+.admin-details {
+
+    display: grid;
+    gap: 10px;
+    color: var(--text-light);
+    margin-bottom: 20px;
+
+}
+
+.admin-details p {
+
+    margin: 0;
+    line-height: 1.5;
+
+}
+
+.admin-details strong {
+
+    color: var(--text);
+
+}
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.admin-actions {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+}
+
+/* ========================================
+   STATUS SELECT
+======================================== */
+
+.status-select {
+
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+}
+
+.status-select:focus {
+
+    border-color: var(--primary);
+
+}
+
+/* ========================================
+   CONFIRM BUTTON
+======================================== */
+
+.confirm-status-btn {
+
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+}
+
+.confirm-status-btn:hover {
+
+    opacity: 0.9;
+    transform: translateY(-1px);
+
+}
+
+.confirm-status-btn:active {
+
+    transform: translateY(0);
+
+}
+
+/* ========================================
+   RESTORE BUTTON
+======================================== */
+
+.restore-btn {
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #22c55e;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+}
+
+.restore-btn:hover {
+
+    background: #16a34a;
+
+    transform: translateY(-2px);
+
+}
+
+.restore-btn:active {
+
+    transform: translateY(0);
+
+}
+
+/* ========================================
+   ARCHIVE BUTTON
+======================================== */
+
+.archive-order-btn {
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #dc3545;
+
+    color: #fff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+.archive-order-btn:hover {
+
+    background: #bb2d3b;
+
+    transform: translateY(-1px);
+
+}
+
+.archive-order-btn:active {
+
+    transform: translateY(0);
+
+}

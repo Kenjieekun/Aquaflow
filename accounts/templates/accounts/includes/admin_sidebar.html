@@ -1,0 +1,121 @@
+<div class="dashboard-sidebar">
+
+    <div class="dashboard-logo">
+
+        <i class="fa-solid fa-droplet"></i>
+
+        <span>AquaFlow Admin</span>
+
+    </div>
+
+    <ul class="dashboard-menu">
+
+        <li class="{% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+
+            <a href="{% url 'admin_dashboard' %}">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_products' %}active{% endif %}">
+
+            <a href="{% url 'admin_products' %}">
+
+                <i class="fa-solid fa-bottle-water"></i>
+
+                <span>Products</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_orders' %}active{% endif %}">
+
+            <a href="{% url 'admin_orders' %}">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>Orders</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_archived_orders' %}active{% endif %}">
+
+            <a href="{% url 'admin_archived_orders' %}">
+
+                <i class="fa-solid fa-box-archive"></i>
+
+                <span>Archived Orders</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_customers' %}active{% endif %}">
+
+            <a href="{% url 'admin_customers' %}">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>Customers</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_reports' %}active{% endif %}">
+
+            <a href="{% url 'admin_reports' %}">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <span>Reports</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_settings' %}active{% endif %}">
+
+            <a href="{% url 'admin_settings' %}">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>Settings</span>
+
+            </a>
+
+        </li>
+
+        <li class="{% if request.resolver_match.url_name == 'admin_audit_logs' %}active{% endif %}">
+
+            <a href="{% url 'admin_audit_logs' %}">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Audit Logs</span>
+
+            </a>
+
+        </li>
+
+    </ul>
+
+    <button
+        id="logoutBtn"
+        class="logout-btn">
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        <span>Logout</span>
+
+    </button>
+
+</div>
