@@ -1,28 +1,22 @@
-import {
-    auth,
-    db
-} from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 
 import {
     doc,
     getDoc,
-    setDoc
+    setDoc,
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 // ========================================
 // FIRESTORE
 // ========================================
 
-const settingsRef = doc(
-    db,
-    "settings",
-    "system"
-);
+const settingsRef = doc(db, "settings", "system");
 
 // ========================================
-// SETTINGS ELEMENTS
+// DOM ELEMENTS
 // ========================================
 
+// Settings
 const systemName = document.getElementById("systemName");
 const businessName = document.getElementById("businessName");
 const businessEmail = document.getElementById("businessEmail");
@@ -36,17 +30,11 @@ const notifyNewOrders = document.getElementById("notifyNewOrders");
 const notifyLowStock = document.getElementById("notifyLowStock");
 const notifyCancelledOrders = document.getElementById("notifyCancelledOrders");
 
-// ========================================
-// BUTTONS
-// ========================================
-
+// Buttons
 const saveSettingsBtn = document.getElementById("saveSettingsBtn");
 const enableBiometricBtn = document.getElementById("enableBiometricBtn");
 
-// ========================================
-// OTP
-// ========================================
-
+// OTP Modal
 const otpModal = document.getElementById("otpModal");
 const otpInput = document.getElementById("otpInput");
 
@@ -54,26 +42,18 @@ const verifyOtpBtn = document.getElementById("verifyOtpBtn");
 const cancelOtpBtn = document.getElementById("cancelOtpBtn");
 const resendOtpBtn = document.getElementById("resendOtpBtn");
 
-// ========================================
-// TOAST
-// ========================================
-
+// Toast
 const toast = document.getElementById("toast");
 const toastMessage = document.getElementById("toastMessage");
-
 // ========================================
 // LOAD SETTINGS
 // ========================================
 
 async function loadSettings() {
-
     try {
-
         const snapshot = await getDoc(settingsRef);
 
-        if (!snapshot.exists()) {
-            return;
-        }
+        if (!snapshot.exists()) return;
 
         const settings = snapshot.data();
 
@@ -89,20 +69,10 @@ async function loadSettings() {
         notifyNewOrders.checked = settings.notifyNewOrders ?? true;
         notifyLowStock.checked = settings.notifyLowStock ?? true;
         notifyCancelledOrders.checked = settings.notifyCancelledOrders ?? true;
-
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error(error);
-
-        showToast(
-            "Unable to load settings.",
-            "error"
-        );
-
+        showToast("Unable to load settings.", "error");
     }
-
 }
 
 // ========================================
@@ -110,9 +80,7 @@ async function loadSettings() {
 // ========================================
 
 async function saveSettings() {
-
     try {
-
         await setDoc(
             settingsRef,
             {
@@ -127,365 +95,187 @@ async function saveSettings() {
 
                 notifyNewOrders: notifyNewOrders.checked,
                 notifyLowStock: notifyLowStock.checked,
-                notifyCancelledOrders: notifyCancelledOrders.checked
-
+                notifyCancelledOrders: notifyCancelledOrders.checked,
             },
             {
-                merge: true
+                merge: true,
             }
         );
 
         showToast("Settings saved successfully.");
-
-    }
-
-    catch (error) {
-
+    } catch (error) {
         console.error(error);
-
-        showToast(
-            "Unable to save settings.",
-            "error"
-        );
-
+        showToast("Unable to save settings.", "error");
     }
-
 }
 
 // ========================================
-// SEND OTP
+// OTP
 // ========================================
 
-saveSettingsBtn.addEventListener(
-    "click",
-    sendOtp
-);
+saveSettingsBtn.addEventListener("click", sendOtp);
+verifyOtpBtn.addEventListener("click", verifyOtp);
+cancelOtpBtn.addEventListener("click", closeOtpModal);
+resendOtpBtn.addEventListener("click", sendOtp);
 
 async function sendOtp() {
-
     saveSettingsBtn.disabled = true;
     saveSettingsBtn.textContent = "Sending OTP...";
 
     try {
-
         const response = await fetch(
             "/admin-panel/settings/send-otp/",
             {
                 method: "POST",
                 headers: {
-                    "X-CSRFToken": getCookie("csrftoken")
-                }
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
             }
         );
 
         const result = await response.json();
 
-        if (result.success) {
-
-            otpModal.classList.add("show");
-            otpInput.focus();
-
-            startResendCountdown();
-
-            showToast(
-                "OTP sent successfully.",
-                "info"
-            );
-
+        if (!result.success) {
+            showToast(result.message, "error");
+            return;
         }
 
-        else {
+        otpModal.classList.add("show");
+        otpInput.focus();
 
-            showToast(
-                result.message,
-                "error"
-            );
+        startResendCountdown();
 
-        }
-
-    }
-
-    catch (error) {
-
+        showToast("OTP sent successfully.", "info");
+    } catch (error) {
         console.error(error);
-
-        showToast(
-            "Unable to send OTP.",
-            "error"
-        );
-
+        showToast("Unable to send OTP.", "error");
+    } finally {
+        saveSettingsBtn.disabled = false;
+        saveSettingsBtn.textContent = "Save Settings";
     }
-
-    saveSettingsBtn.disabled = false;
-    saveSettingsBtn.textContent = "Save Settings";
-
 }
-
-// ========================================
-// VERIFY OTP
-// ========================================
-
-verifyOtpBtn.addEventListener(
-    "click",
-    verifyOtp
-);
 
 async function verifyOtp() {
-
     const formData = new FormData();
+    formData.append("otp", otpInput.value.trim());
 
-    formData.append(
-        "otp",
-        otpInput.value.trim()
-    );
-
-    const response = await fetch(
-        "/admin-panel/settings/verify-otp/",
-        {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: formData
-        }
-    );
-
-    const result = await response.json();
-
-    if (!result.success) {
-
-        showToast(
-            result.message,
-            "error"
+    try {
+        const response = await fetch(
+            "/admin-panel/settings/verify-otp/",
+            {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: formData,
+            }
         );
 
-        return;
+        const result = await response.json();
 
+        if (!result.success) {
+            showToast(result.message, "error");
+            return;
+        }
+
+        closeOtpModal();
+        await saveSettings();
+    } catch (error) {
+        console.error(error);
+        showToast("OTP verification failed.", "error");
     }
-
-    otpModal.classList.remove("show");
-    otpInput.value = "";
-
-    await saveSettings();
-
 }
 
-// ========================================
-// CANCEL OTP
-// ========================================
-
-cancelOtpBtn.addEventListener(
-    "click",
-    () => {
-
-        otpModal.classList.remove("show");
-        otpInput.value = "";
-
-    }
-);
-
-// ========================================
-// RESEND OTP
-// ========================================
-
-resendOtpBtn.addEventListener(
-    "click",
-    sendOtp
-);
+function closeOtpModal() {
+    otpModal.classList.remove("show");
+    otpInput.value = "";
+}
 
 function startResendCountdown() {
-
     let seconds = 60;
 
     resendOtpBtn.disabled = true;
-    resendOtpBtn.textContent = `Resend OTP (${seconds}s)`;
 
     const timer = setInterval(() => {
+        resendOtpBtn.textContent = `Resend OTP (${seconds}s)`;
 
         seconds--;
 
-        resendOtpBtn.textContent = `Resend OTP (${seconds}s)`;
-
-        if (seconds <= 0) {
-
+        if (seconds < 0) {
             clearInterval(timer);
 
             resendOtpBtn.disabled = false;
             resendOtpBtn.textContent = "Resend OTP";
-
         }
-
     }, 1000);
-
 }
 
 // ========================================
 // BIOMETRICS
 // ========================================
 
-enableBiometricBtn.addEventListener(
-    "click",
-    registerBiometric
-);
+enableBiometricBtn.addEventListener("click", registerBiometric);
 
 function base64urlToUint8Array(base64url) {
+    const padding = "=".repeat((4 - (base64url.length % 4)) % 4);
 
-    const padding =
-        "=".repeat((4 - base64url.length % 4) % 4);
+    const base64 = (base64url + padding)
+        .replace(/-/g, "+")
+        .replace(/_/g, "/");
 
-    const base64 =
-        (base64url + padding)
-            .replace(/-/g, "+")
-            .replace(/_/g, "/");
-
-    const binary =
-        atob(base64);
+    const binary = atob(base64);
 
     return Uint8Array.from(
         binary,
-        character => character.charCodeAt(0)
+        char => char.charCodeAt(0)
     );
-
 }
 
 function bufferToBase64url(buffer) {
-
-    const bytes = new Uint8Array(buffer);
-
-    let binary = "";
-
-    bytes.forEach(byte => {
-        binary += String.fromCharCode(byte);
-    });
-
-    return btoa(binary)
+    return btoa(
+        String.fromCharCode(...new Uint8Array(buffer))
+    )
         .replace(/\+/g, "-")
         .replace(/\//g, "_")
         .replace(/=/g, "");
-
 }
 
 async function registerBiometric() {
 
+    if (!window.PublicKeyCredential) {
+        showToast(
+            "This device does not support biometrics.",
+            "error"
+        );
+        return;
+    }
+
+    const currentUser = auth.currentUser;
+
+    if (!currentUser) {
+        showToast(
+            "Please login first.",
+            "error"
+        );
+        return;
+    }
+
     try {
 
-        const currentUser = auth.currentUser;
+        const options = await beginRegistration(currentUser);
 
-        if (!currentUser) {
-
-            showToast(
-                "Please login first.",
-                "error"
-            );
-
-            return;
-
-        }
-
-        // Begin registration
-        const beginResponse = await fetch(
-            "/webauthn/register/begin/",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify({
-                    firebaseUid: currentUser.uid,
-                    email: currentUser.email,
-                    displayName:
-                        currentUser.displayName ||
-                        "Aqua Admin"
-                })
-            }
-        );
-
-        const options = await beginResponse.json();
-
-        if (!beginResponse.ok) {
-
-            throw new Error(
-                options.message ||
-                "Unable to begin registration."
-            );
-
-        }
-
-        options.challenge =
-            base64urlToUint8Array(options.challenge);
-
-        options.user.id =
-            base64urlToUint8Array(options.user.id);
-
-        if (options.excludeCredentials) {
-
-            options.excludeCredentials =
-                options.excludeCredentials.map(
-                    credential => ({
-                        ...credential,
-                        id: base64urlToUint8Array(
-                            credential.id
-                        )
-                    })
-                );
-
-        }
-
-        // Create credential
         const credential =
             await navigator.credentials.create({
                 publicKey: options
             });
 
-        // Finish registration
-        const finishResponse = await fetch(
-            "/webauthn/register/finish/",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify({
-
-                    id: credential.id,
-
-                    rawId: bufferToBase64url(
-                        credential.rawId
-                    ),
-
-                    type: credential.type,
-
-                    response: {
-
-                        clientDataJSON:
-                            bufferToBase64url(
-                                credential.response.clientDataJSON
-                            ),
-
-                        attestationObject:
-                            bufferToBase64url(
-                                credential.response.attestationObject
-                            )
-
-                    }
-
-                })
-            }
-        );
-
-        const result =
-            await finishResponse.json();
-
-        if (!finishResponse.ok || !result.success) {
-
+        if (!credential) {
             throw new Error(
-                result.message ||
-                "Registration failed."
+                "Credential creation failed."
             );
-
         }
+
+        await finishRegistration(credential);
 
         showToast(
             "Biometric registered successfully."
@@ -507,22 +297,143 @@ async function registerBiometric() {
 
 }
 
+async function beginRegistration(user) {
+
+    const response = await fetch(
+        "/webauthn/register/begin/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({
+                firebaseUid: user.uid,
+                email: user.email,
+                displayName:
+                    user.displayName ||
+                    "Aqua Admin"
+            })
+        }
+    );
+
+    let options;
+
+    try {
+        options = await response.json();
+    }
+
+    catch {
+        throw new Error(
+            "Invalid response from server."
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            options.message ||
+            "Unable to begin registration."
+        );
+    }
+
+    options.challenge =
+        base64urlToUint8Array(
+            options.challenge
+        );
+
+    options.user.id =
+        base64urlToUint8Array(
+            options.user.id
+        );
+
+    options.excludeCredentials =
+        (options.excludeCredentials || []).map(
+            credential => ({
+                ...credential,
+                id: base64urlToUint8Array(
+                    credential.id
+                )
+            })
+        );
+
+    return options;
+
+}
+
+async function finishRegistration(
+    credential
+) {
+
+    const response = await fetch(
+        "/webauthn/register/finish/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
+            },
+            body: JSON.stringify({
+
+                id: credential.id,
+
+                rawId: bufferToBase64url(
+                    credential.rawId
+                ),
+
+                type: credential.type,
+
+                response: {
+
+                    clientDataJSON:
+                        bufferToBase64url(
+                            credential.response.clientDataJSON
+                        ),
+
+                    attestationObject:
+                        bufferToBase64url(
+                            credential.response.attestationObject
+                        )
+
+                }
+
+            })
+        }
+    );
+
+    let result;
+
+    try {
+        result = await response.json();
+    }
+
+    catch {
+        throw new Error(
+            "Invalid response from server."
+        );
+    }
+
+    if (!response.ok || !result.success) {
+        throw new Error(
+            result.message ||
+            "Registration failed."
+        );
+    }
+
+    return result;
+
+}
+
 // ========================================
 // TOAST
 // ========================================
 
 function showToast(message, type = "success") {
-
     toast.className = `toast ${type} show`;
-
     toastMessage.textContent = message;
 
     setTimeout(() => {
-
         toast.classList.remove("show");
-
     }, 3000);
-
 }
 
 // ========================================
@@ -530,37 +441,16 @@ function showToast(message, type = "success") {
 // ========================================
 
 function getCookie(name) {
-
-    let cookieValue = null;
-
-    if (document.cookie && document.cookie !== "") {
-
-        const cookies = document.cookie.split(";");
-
-        for (const cookie of cookies) {
-
-            const value = cookie.trim();
-
-            if (value.startsWith(name + "=")) {
-
-                cookieValue = decodeURIComponent(
-                    value.substring(name.length + 1)
-                );
-
-                break;
-
-            }
-
-        }
-
-    }
-
-    return cookieValue;
-
+    return document.cookie
+        .split("; ")
+        .find(cookie => cookie.startsWith(`${name}=`))
+        ?.split("=")[1] ?? null;
 }
 
 // ========================================
 // INITIALIZE
 // ========================================
 
-loadSettings();
+document.addEventListener("DOMContentLoaded", () => {
+    loadSettings();
+});
