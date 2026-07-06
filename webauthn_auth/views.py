@@ -91,30 +91,38 @@ def finish_registration(request):
 @require_POST
 def begin_authentication(request):
 
-    allow_credentials = []
+    credentials = []
 
     for doc in db.collection("webauthn_credentials").stream():
 
         data = doc.to_dict()
 
-        allow_credentials.append(
+        credential_id = (
+            data.get("credential_id")
+            or data.get("credentialId")
+        )
 
+        if not credential_id:
+            continue
+
+        credentials.append(
             PublicKeyCredentialDescriptor(
-
-                id=base64.b64decode(
-                    data["credential_id"]
-                )
-
+                id=base64.b64decode(credential_id)
             )
+        )
 
+    if not credentials:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "No biometric credentials registered."
+            },
+            status=404,
         )
 
     options = generate_authentication_options(
-
         rp_id="kenjie.pythonanywhere.com",
-
-        allow_credentials=allow_credentials,
-
+        allow_credentials=credentials,
     )
 
     request.session["authentication_challenge"] = (
@@ -122,13 +130,9 @@ def begin_authentication(request):
     )
 
     return JsonResponse(
-
         json.loads(
-
             options_to_json(options)
-
         )
-
     )
 
 
